@@ -1,61 +1,58 @@
-let computerSelection = (Math.random() * 10)
-let playerSelection = prompt("What will it be, champ?").toUpperCase()
-let computerOutcome = getComputerSelection(computerSelection)
-let playerOutcome = getPlayerSelection(playerSelection)
+let playerScore = 0;
+let computerScore = 0;
 
-function getComputerSelection(computerSelection){
-  if (computerSelection <= 3.33) {
+function computerPlay() {
+  let random = (Math.random() * 10)
+  if (random <= 3.33) {
     return "ROCK"
-  } else if (computerSelection > 3.33 && computerSelection <= 6.66) {
+  } else if (random > 3.33 && random <= 6.66) {
     return "SCISSORS"
   } else {
     return "PAPER"
   }
 }
 
-function getPlayerSelection(playerSelection) {
-  if (playerSelection === "ROCK") {
-    return "ROCK"
-  } else if (playerSelection === "SCISSORS")  {
-    return "SCISSORS"
-  } else if (playerSelection === "PAPER") {
-    return "PAPER"
-  } else {
-    return alert("Try again, this time type either 'ROCK' 'Paper' or 'Scissors'.")
-  }
-}
 
-function getWinner(computerOutcome, playerOutcome) {
+function playRound(computerSelection, playerChoice) {
   if (
-    computerOutcome === "ROCK" && playerOutcome === "SCISSORS" 
+    computerSelection === "ROCK" && playerChoice === "SCISSORS" 
     || 
-    computerOutcome === "SCISSORS" && playerOutcome === "PAPER"
+    computerSelection === "SCISSORS" && playerChoice === "PAPER"
     ||
-    computerOutcome === "PAPER" && playerOutcome === "ROCK"
+    computerSelection === "PAPER" && playerChoice === "ROCK"
       ) {
+    computerScore += 1
     return "COMPUTER WINS"
   } else if (
-    playerOutcome === "ROCK" && computerOutcome === "SCISSORS"
+    playerChoice === "ROCK" && computerSelection === "SCISSORS"
     ||
-    playerOutcome === "SCISSORS" && computerOutcome === "PAPER"
+    playerChoice === "SCISSORS" && computerSelection === "PAPER"
     ||
-    playerOutcome === "PAPER" && computerOutcome === "ROCK"
+    playerChoice === "PAPER" && computerSelection === "ROCK"
   ) {
+    playerScore += 1
     return "PLAYER WINS"
   } else {
     return "DRAW"
   }
 }
 
-let roundWinner = getWinner(computerOutcome, playerOutcome)
+for (let i = 0; i < 1000; i++) {
+  let playerChoice = prompt("What will it be, champ?").toUpperCase();
+  const computerSelection = computerPlay();
+  let roundResult = playRound(computerSelection, playerChoice);
+  console.log("Player: " + playerChoice)
+  console.log("Computer: " + computerSelection)
+  console.log(roundResult);
+  console.log("Player Score : " + playerScore);
+  console.log("Computer Score: " + computerScore);
+  console.log("")
+
+  if (playerScore > 4 || computerScore > 4) {
+    console.log("GAME OVER")
+    break;
+  }
+}
 
 
-
-
-
-
-
-console.log(playerOutcome)
-console.log(computerOutcome)
-console.log(roundWinner)
 
