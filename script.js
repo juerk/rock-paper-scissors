@@ -1,21 +1,14 @@
 let computerScore = 0;
 let playerScore = 0;
+const container = document.querySelector('.scoreContainer');
 
-let rockButton = document.getElementById('rockButton');
-rockButton.addEventListener('click', () => {
-  playRoundRock();
-});
+let para = document.createElement('p');
+let cara = document.createElement('p');
+let resultara = document.createElement('p');
 
-let paperButton = document.getElementById('paperButton');
-paperButton.addEventListener('click', () => {
-  playRoundPaper();
-});
-
-let scissorsButton = document.getElementById('scissorsButton');
-scissorsButton.addEventListener("click", () => {
-  playRoundScissors();
-})
-
+container.appendChild(para);
+container.appendChild(cara);
+container.appendChild(resultara);
 
 const getComputerSelection = function(computerChoice) {
   let random = Math.random();
@@ -29,55 +22,79 @@ const getComputerSelection = function(computerChoice) {
   return computerChoice;
 }
 
+let rockButton = document.getElementById('rockButton');
+rockButton.addEventListener('click', () => {
+  playRoundRock();
+});
+
 const playRoundRock = function(roundResult) {
   let computerChoice = getComputerSelection();
-  if (computerChoice === "ROCK") {
-    roundResult = "DRAW"
+  if (playerScore === 5 || computerScore === 5) {
+    alert("Game Over") 
+  }
+  else if (computerChoice === "ROCK") {
+    roundResult = "DRAW - Both chose rock"
   } else if (computerChoice === "PAPER") {
-    roundResult = "Computer Wins!"
+    roundResult = "Computer Wins! - Paper covers rock"
     computerScore += 1;
   } else if (computerChoice === "SCISSORS") {
-    roundResult = "Player Wins!"
+    roundResult = "Player Wins! - Rock smashes scissors!"
     playerScore += 1;
   }
-  console.log(computerChoice);
   console.log(roundResult);
-  console.log(playerScore);
-  console.log(computerScore);
+  para.innerText = "Player Score: " + playerScore;
+  cara.innerText = "Computer Score: " + computerScore;
+  resultara.innerText = roundResult;
 }
+
+let paperButton = document.getElementById('paperButton');
+paperButton.addEventListener('click', () => {
+  playRoundPaper();
+});
 
 const playRoundPaper = function(roundResult) {
   let computerChoice = getComputerSelection();
-  if (computerChoice === "ROCK") {
-    roundResult = "Player Wins!"
+  if (playerScore === 5 || computerScore === 5) {
+    alert("Game Over") 
+  }
+  else if (computerChoice === "ROCK") {
+    roundResult = "Player Wins! - Paper covers rock"
     playerScore += 1;
   } else if (computerChoice === "PAPER") {
-    roundResult = "DRAW"
+    roundResult = "DRAW - Both chose paper!"
   } else if (computerChoice === "SCISSORS") {
-    roundResult = "Computer Wins"
+    roundResult = "Computer Wins! - Scissors cuts paper"
     computerScore += 1;
   }
-  console.log(computerChoice);
   console.log(roundResult);
-  console.log(playerScore);
-  console.log(computerScore);
+  para.innerText = "Player Score: " + playerScore;
+  cara.innerText = "Computer Score: " + computerScore;
+  resultara.innerText = roundResult;
 } 
+
+let scissorsButton = document.getElementById('scissorsButton');
+scissorsButton.addEventListener("click", () => {
+  playRoundScissors();
+})
 
 const playRoundScissors = function (roundResult) {
   let computerChoice = getComputerSelection();
-  if (computerChoice === "ROCK") {
-    roundResult = "Computer Wins!"
+  if (playerScore === 5 || computerScore === 5) {
+    alert("Game Over") 
+  }
+  else if (computerChoice === "ROCK") {
+    roundResult = "Computer Wins! - Rock smashes scissors!"
     computerScore += 1;
   } else if (computerChoice = "PAPER") {
-    roundResult = "Players Wins!"
+    roundResult = "Players Wins! - Scissors cuts paper"
     playerScore += 1;
   } else if ( computerChoice = "SCISSORS") {
-    roundResult = "DRAW"
+    roundResult = "DRAW - Both chose scissors"
   }
-  console.log(computerChoice);
   console.log(roundResult);
-  console.log(playerScore);
-  console.log(computerScore);
+  para.innerText = "Player Score: " + playerScore;
+  cara.innerText = "Computer Score: " + computerScore;
+  resultara.innerText = roundResult;
 }
 
 
@@ -85,20 +102,3 @@ const playRoundScissors = function (roundResult) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-// computer Selection DONE
-// player Selection
-// connect buttons to player Selection
-// function to choose winner
-// keep player and computer score
-// first to 5 wins
-// output results to web screen
